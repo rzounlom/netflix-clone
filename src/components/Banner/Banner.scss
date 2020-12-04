@@ -2,6 +2,7 @@
   height: 448px;
   color: white;
   object-fit: contain;
+  background-color: rgba(0, 0, 0, 0);
 
   .banner__contents {
     margin-left: 30px;
@@ -31,7 +32,7 @@
         &:hover {
           color: #000;
           background-color: #e6e6e6;
-          transition: all 0.4s;
+          transition: all 0.4s ease-in-out;
         }
       }
     }
