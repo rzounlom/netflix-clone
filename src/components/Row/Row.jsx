@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../axios/axios";
 import "./Row.scss";
 
-const Row = ({ title, fetchUrl }) => {
+const Row = ({ title, fetchUrl, isLargeRow }) => {
   const baseNetflixOriginalMovieImgUrl = "https://image.tmdb.org/t/p/original";
   const [movies, setMovies] = useState([]);
 
@@ -17,9 +17,11 @@ const Row = ({ title, fetchUrl }) => {
   }, [fetchUrl]);
   const listMovies = movies.map((movie) => (
     <img
-      className="row__poster"
+      className={`row__poster ${isLargeRow && "row__posterLarge"}`}
       key={movie.id}
-      src={`${baseNetflixOriginalMovieImgUrl}${movie.poster_path}`}
+      src={`${baseNetflixOriginalMovieImgUrl}${
+        isLargeRow ? movie.poster_path : movie.backdrop_path
+      }`}
       alt={movie.name}
     ></img>
   ));

@@ -4,13 +4,20 @@ import requests from "./utils/requests";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Hello To the React Netflix Clone</h1>
+    <div className="app">
+      {/* navbar */}
+      {/* banner */}
       <Row
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow
       />
-      <Row title="Trending Now" fetchUrl={requests.fetchTreding} />
+      <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
+      <Row title="Action Movies" fetchUrl={requests.fetchTreding} />
+      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
+      <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
+      <Row title="Romance Movies" fetchUrl={requests.fetchRomarnceMovies} />
+      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
     </div>
   );
 };
