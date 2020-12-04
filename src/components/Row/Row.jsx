@@ -25,7 +25,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
       alt={movie.name}
     ></img>
   ));
-  console.log(movies);
+
   return (
     <div className="row">
       <h2>{title}</h2>

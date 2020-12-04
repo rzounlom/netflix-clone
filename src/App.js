@@ -1,12 +1,16 @@
-import "./App.css";
-import Row from "./components/Row/Row";
+import "./App.scss";
+
 import requests from "./utils/requests";
+
+import Row from "./components/Row/Row";
+import Navbar from "./components/Navbar/Navbar";
+import Banner from "./components/Banner/Banner";
 
 const App = () => {
   return (
     <div className="app">
-      {/* navbar */}
-      {/* banner */}
+      <Navbar />
+      <Banner />
       <Row
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
