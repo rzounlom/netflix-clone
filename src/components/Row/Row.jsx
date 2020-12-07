@@ -13,8 +13,9 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios.get(fetchUrl);
-      setMovies(request.data.results);
-      return request;
+      const response = request.data.results;
+      setMovies(response);
+      return response;
     };
 
     fetchData();
@@ -29,21 +30,35 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     },
   };
 
-  const handleMovieUrl = (movie) => {
-    if (trailerUrl) {
-      setTrailerUrl("");
-    } else {
-      movieTrailer(movie?.name || "")
-        .then((url) => {
-          //https://www.youtube.com/watch?v=XtMThy8QKqU
-          const urlParams = new URLSearchParams(new URL(url).search); //get url params (everything after question mark)
-          setTrailerUrl(urlParams.get("v"));
-        })
-        .catch((error) => console.log(error));
-    }
-  };
+  // const handleMovieUrl = (movie) => {
+  //   if (trailerUrl) {
+  //     setTrailerUrl("");
+  //   } else {
+  //     const movieDate = movie.release_date
+  //       ? movie.release_date.substr(0, 4)
+  //       : movie.first_air_date
+  //       ? movie.first_air_date.substr(0, 4)
+  //       : null;
+  //     console.log(movie);
+  //     movieTrailer(
+  //       movie?.name || movie?.title || movie.original_name || "",
+  //       movieDate.toString(),
+  //       { id: true, multi: true }
+  //     )
+  //       .then((url) => {
+  //         // //https://www.youtube.com/watch?v=XtMThy8QKqU
+  //         console.log(url);
+  //         const urlParams = new URLSearchParams(new URL(url).search); //get url params (everything after question mark)
+  //         setTrailerUrl(urlParams.get("v"));
 
-  console.log("trailer url: " + trailerUrl);
+  //         console.log(trailerUrl);
+  //       })
+  //       .catch((error) => {
+  //         console.log(trailerUrl);
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   return (
     <div className="row">
@@ -57,7 +72,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
             alt={movie.name}
-            onClick={handleMovieUrl(movie)}
+            // onClick={() => handleMovieUrl(movie)}
           ></img>
         ))}
       </div>
