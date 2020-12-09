@@ -24,6 +24,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     height: "390",
     width: "100%",
     playerVars: {
+      // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   };
@@ -45,15 +46,14 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
-      findMovieTrailer(
-        movie.name || movie.original_name || movie.original_title
-      );
+      findMovieTrailer(movie.title || movie.name || movie.original_title);
     }
   };
 
   return (
     <div className="row">
       <h2>{title}</h2>
+
       <div className="row__posters">
         {movies.map((movie) => (
           <img
