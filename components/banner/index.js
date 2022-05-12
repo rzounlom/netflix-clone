@@ -2,8 +2,7 @@ import Image from "next/image";
 import styles from "./banner.module.css";
 import { useRouter } from "next/router";
 
-const Banner = (props) => {
-  const { title, subTitle, imgUrl, videoId } = props;
+const Banner = ({ title, subTitle, imgUrl, videoId }) => {
   const router = useRouter();
 
   const handleOnPlay = () => {
