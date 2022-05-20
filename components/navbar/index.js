@@ -2,15 +2,30 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { magic } from "../../lib/magic-client";
 import styles from "./navbar.module.css";
 import { useRouter } from "next/router";
 
-const Navbar = ({ username }) => {
-  console.log({ username });
+const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  // const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [didToken, setDidToken] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const confirmLogin = async () => {
+      try {
+        const { email } = await magic.user.getMetadata();
+        if (email) {
+          setUsername(email);
+        }
+      } catch (error) {
+        console.log("Error retrieving email", error);
+      }
+    };
+
+    confirmLogin();
+  }, []);
 
   const handleOnClickHome = (event) => {
     event.preventDefault();
@@ -21,7 +36,21 @@ const Navbar = ({ username }) => {
     router.push("/browse/my-list");
   };
   const handleShowDropdown = () => setShowDropdown(!showDropdown);
-  const handleSignout = () => alert("signed out");
+  const handleSignout = async (event) => {
+    event.preventDefault();
+
+    try {
+      await magic.user.logout();
+      router.route("/login");
+      const isLoggedIn = await magic.user.isLoggedIn();
+      if (!isLoggedIn) {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.error("Error logging out", error);
+      router.push("/login");
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

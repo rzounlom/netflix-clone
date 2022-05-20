@@ -10,7 +10,6 @@ const SectionCards = ({
   shouldWrap = false,
   shouldScale,
 }) => {
-  console.log({ videos });
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
