@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const confirmLogin = async () => {
       try {
